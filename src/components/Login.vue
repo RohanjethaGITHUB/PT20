@@ -81,12 +81,18 @@ export default {
            
          let result = response.data;
          const jwt = result.token;
-         const userData = result.user;
+         if(result.user){
+          const userData = result.user;
           window.localStorage.setItem('jwt', jwt)
           window.localStorage.setItem('userData', JSON.stringify(userData))
-         this.loader = false;
-         this.$router.push('/dashboard')
-         this.$router.go('/dashboard')
+          this.loader = false;
+          this.$router.push('/dashboard')
+          this.$router.go('/dashboard')
+           
+         } else {
+           alert("Invalid User");
+           this.loader = false; 
+         }
          
       });
       
